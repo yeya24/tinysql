@@ -123,6 +123,9 @@ func EncodeIndexSeekKey(tableID int64, idxID int64, encodedValue []byte) kv.Key 
 // DecodeIndexKeyPrefix decodes the key and gets the tableID, indexID, indexValues.
 func DecodeIndexKeyPrefix(key kv.Key) (tableID int64, indexID int64, indexValues []byte, err error) {
 	/* Your code here */
+	if key == nil {
+		return
+	}
 	k := key
 	if !hasTablePrefix(key) {
 		err = errInvalidKey.GenWithStack("invalid key - %q", k)
